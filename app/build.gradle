@@ -1,0 +1,165 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "27.0.0"
+    defaultConfig {
+        applicationId "com.pro.cryptobot"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "CRYPTOCOMPARE_BASE_URL", '"https://min-api.cryptocompare.com/data/"'
+            buildConfigField "String", "LUNO_BASE_URL", '"https://api.mybitx.com/api/1/"'
+            buildConfigField "String", "XBITASIA_BASE_URL", '"http://xbitasia-test.draglet.com:80/gateway/public"'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "CRYPTOCOMPARE_BASE_URL", '"https://min-api.cryptocompare.com/data/"'
+            buildConfigField "String", "LUNO_BASE_URL", '"https://api.mybitx.com/api/1/"'
+            buildConfigField "String", "XBITASIA_BASE_URL", '"http://xbitasia-test.draglet.com:80/gateway/public"'
+        }
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+    }
+}
+
+dependencies {
+    ext.RX_LIFE_CYCLE_VERSION = '2.1.0'
+    ext.DAGGER2_VERSION = '2.8'
+    ext.BUTTER_KNIFE_VERSION = '8.6.0'
+    ext.OKHTTP_VERSION = '3.7.0'
+    ext.RETROFIT_VERSION = '2.3.0'
+    ext.RX_ANDROID_VERSION = '2.0.1'
+    ext.RX_JAVA_VERSION = '2.1.1'
+    ext.GUAVA_VERSION = '19.0'
+    ext.RETROLAMBDA_CONFIG_VERSION = '2.3.0'
+    ext.PICASSO_VERSION = '2.5.2'
+    ext.CALLIGRAPHY_VERSION = '2.2.0'
+    ext.VPI_VERSION = '2.4.1.1'
+    ext.PAPER_PARCEL_VERSION = '2.0.1'
+    ext.RECYCLEVIEW_SNAP_VERSION = '1.3'
+    ext.FLEXBOX_VERSION = '0.3.0'
+    ext.DEEPLINK_DISPATCH_VERSION = '3.1.1'
+    ext.CONSTRAINT_LAYOUT_VERSION = '1.0.2'
+    ext.JSR250_VERSION = '1.0'
+
+    ext.JUNIT_VERSION = '4.12'
+    ext.MOCKITO_VERSION = '1.10.19'
+    ext.ESPRESSO_VERSION = '2.2.2'
+
+    androidTestCompile("com.android.support.test.espresso:espresso-core:${ESPRESSO_VERSION}", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile "junit:junit:${JUNIT_VERSION}"
+    testCompile "org.mockito:mockito-core:${MOCKITO_VERSION}"
+
+    // ButterKnife
+    compile "com.jakewharton:butterknife:${BUTTER_KNIFE_VERSION}"
+    kapt "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE_VERSION}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE_VERSION}"
+
+    // Dagger 2
+    compile "com.google.dagger:dagger:${DAGGER2_VERSION}"
+    kapt "com.google.dagger:dagger-compiler:${DAGGER2_VERSION}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER2_VERSION}"
+
+    // Data Binding Compiler
+    kapt "com.android.databinding:compiler:${rootProject.ext.ANDROID_BUILD_TOOLS_VERSION}"
+
+    // Retrolambda Config
+    retrolambdaConfig "net.orfjackal.retrolambda:retrolambda:${RETROLAMBDA_CONFIG_VERSION}"
+
+    // Parcel Annotation
+    compile "nz.bradcampbell:paperparcel:${PAPER_PARCEL_VERSION}"
+    compile "nz.bradcampbell:paperparcel-kotlin:${PAPER_PARCEL_VERSION}"
+    kapt "nz.bradcampbell:paperparcel-compiler:${PAPER_PARCEL_VERSION}"
+    annotationProcessor "nz.bradcampbell:paperparcel-compiler:${PAPER_PARCEL_VERSION}"
+
+    // Kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Android support libraries
+    compile "com.android.support:design:${rootProject.ext.SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:appcompat-v7:${rootProject.ext.SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:cardview-v7:${rootProject.ext.SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:recyclerview-v7:${rootProject.ext.SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:gridlayout-v7:${rootProject.ext.SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:support-compat:${rootProject.ext.SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:support-v4:${rootProject.ext.SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:support-v13:${rootProject.ext.SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:customtabs:${rootProject.ext.SUPPORT_LIBRARY_VERSION}"
+    compile "com.android.support:support-annotations:${rootProject.ext.SUPPORT_LIBRARY_VERSION}"
+
+    // Guava
+    compile group: 'com.google.guava', name: 'guava', version: "${GUAVA_VERSION}"
+
+    // RX
+    compile "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_VERSION}"
+    compile "io.reactivex.rxjava2:rxjava:${RX_JAVA_VERSION}"
+
+    // RX-Life cycle
+    compile "com.trello.rxlifecycle2:rxlifecycle:${RX_LIFE_CYCLE_VERSION}"
+    compile "com.trello.rxlifecycle2:rxlifecycle-components:${RX_LIFE_CYCLE_VERSION}"
+
+    // Retrofit
+    compile "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
+    compile "com.squareup.retrofit2:converter-moshi:${RETROFIT_VERSION}"
+    compile "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT_VERSION}"
+    compile("com.squareup.retrofit2:converter-simplexml:${RETROFIT_VERSION}") {
+        exclude group: 'xpp3', module: 'xpp3'
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'stax', module: 'stax'
+    }
+
+    // OkHttp
+    compile "com.squareup.okhttp3:okhttp:${OKHTTP_VERSION}"
+    compile "com.squareup.okhttp3:logging-interceptor:${OKHTTP_VERSION}"
+
+    // Picasso
+    compile "com.squareup.picasso:picasso:${PICASSO_VERSION}"
+
+    // Calligraphy for custom fonts handling
+    compile "uk.co.chrisjenx:calligraphy:${CALLIGRAPHY_VERSION}"
+
+    // RecycleViewSnap
+    compile "com.github.rubensousa:gravitysnaphelper:${RECYCLEVIEW_SNAP_VERSION}"
+
+    // Flexbox
+    compile "com.google.android:flexbox:${FLEXBOX_VERSION}"
+
+    // View Pager Indicator
+    compile "fr.avianey.com.viewpagerindicator:library:${VPI_VERSION}@aar"
+
+    // Deeplink Dispatch
+    compile "com.airbnb:deeplinkdispatch:${DEEPLINK_DISPATCH_VERSION}"
+    kapt "com.airbnb:deeplinkdispatch-processor:${DEEPLINK_DISPATCH_VERSION}"
+    annotationProcessor "com.airbnb:deeplinkdispatch-processor:${DEEPLINK_DISPATCH_VERSION}"
+
+    compile "com.android.support.constraint:constraint-layout:${CONSTRAINT_LAYOUT_VERSION}"
+    provided "javax.annotation:jsr250-api:${JSR250_VERSION}"
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+}
+repositories {
+    mavenCentral()
+}
