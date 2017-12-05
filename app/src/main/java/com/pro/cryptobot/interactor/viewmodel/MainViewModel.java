@@ -1,5 +1,7 @@
 package com.pro.cryptobot.interactor.viewmodel;
 
+import android.databinding.ObservableBoolean;
+
 import io.reactivex.Observable;
 
 /**
@@ -9,5 +11,7 @@ import io.reactivex.Observable;
 public interface MainViewModel extends ViewModel {
 
     Observable<String> getPrice(String fsym, String tsyms, String e, String extraParams);
+
+    ObservableBoolean getLoading();
 
 }

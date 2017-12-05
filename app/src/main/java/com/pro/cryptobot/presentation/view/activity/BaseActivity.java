@@ -1,4 +1,4 @@
-package com.pro.cryptobot.presentation.activity;
+package com.pro.cryptobot.presentation.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.pro.cryptobot.R;
 import com.pro.cryptobot.interactor.scheduler.BaseSchedulerProvider;
 import com.pro.cryptobot.interactor.viewmodel.ViewModel;
 import com.pro.cryptobot.presentation.navigation.Navigator;
@@ -18,6 +20,7 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Scheduler;
@@ -36,6 +39,10 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     @Inject
     BaseSchedulerProvider scheduler;
+
+    @Nullable
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private Unbinder unbinder;
 
@@ -60,6 +67,14 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         return navigator;
     }
 
+    @Nullable
+    public Toolbar getToolbar() {
+        return toolbar;
+    }
+
+    protected String getToolbarTitle() {
+        return "";
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +104,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -116,13 +131,13 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     protected void onBindView() {
         unbinder = ButterKnife.bind(this);
-        /*Toolbar toolbar = getToolbar();
+        Toolbar toolbar = getToolbar();
         if (toolbar != null){
             if (getToolbarTitle() != null) {
                 toolbar.setTitle(getToolbarTitle());
             }
             setSupportActionBar(toolbar);
-        }*/
+        }
     }
 
     protected void onInject() {}

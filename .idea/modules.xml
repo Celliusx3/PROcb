@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Cryptobot.iml" filepath="$PROJECT_DIR$/Cryptobot.iml" />
+      <module fileurl="file://D:\Users\OCCOYANC\Desktop\Self\Cryptobot.iml" filepath="D:\Users\OCCOYANC\Desktop\Self\Cryptobot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Self.iml" filepath="$PROJECT_DIR$/Self.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

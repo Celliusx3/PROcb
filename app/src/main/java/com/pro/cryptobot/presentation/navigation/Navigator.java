@@ -8,7 +8,7 @@ package com.pro.cryptobot.presentation.navigation;
 import android.content.Context;
 import android.content.Intent;
 
-import com.pro.cryptobot.presentation.activity.MainActivity;
+import com.pro.cryptobot.presentation.view.activity.MainActivity;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

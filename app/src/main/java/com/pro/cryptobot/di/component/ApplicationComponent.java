@@ -22,7 +22,7 @@ public interface ApplicationComponent {
 
     Context getApplicationContext();
 
-    void inject(CryptoBotApplication astroGoApplication);
+    void inject(CryptoBotApplication cryptoBotApplication);
 
     HomeComponent plus(HomeModule homeModule);
 

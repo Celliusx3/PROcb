@@ -1,4 +1,4 @@
-package com.pro.cryptobot.presentation.activity;
+package com.pro.cryptobot.presentation.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

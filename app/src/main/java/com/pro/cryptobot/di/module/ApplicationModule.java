@@ -117,28 +117,4 @@ public class ApplicationModule {
     CryptoBotPref provideCryptoBotPref(SharedPreferences sharedPreferences) {
         return  new CryptoBotSharedPref(sharedPreferences);
     }
-//    @Provides
-//    @Singleton
-//    SharedPreferences provideSharedPreferences(Context context) {
-//        if (mPrefs == null) {
-//            String key = context.getPackageName();
-//            if (key == null) {
-//                throw new NullPointerException("Prefs key may not be null");
-//            }
-//            mPrefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
-//        }
-//        return mPrefs;
-//    }
-//
-//    @Provides
-//    @Singleton
-//    AstroGoPref provideAstroGoPref(SharedPreferences sharedPreferences) {
-//        return  new AstroGoSharedPref(sharedPreferences);
-//    }
-//
-//    @Provides
-//    @Singleton
-//    AstroGoDb provideAstroGoDb() {
-//        return new AstroGoDbRoom();
-//    }
 }

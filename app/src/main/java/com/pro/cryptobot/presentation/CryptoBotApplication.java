@@ -1,7 +1,6 @@
 package com.pro.cryptobot.presentation;
 
 import android.support.multidex.MultiDexApplication;
-import android.util.Log;
 
 import com.pro.cryptobot.di.component.ApplicationComponent;
 import com.pro.cryptobot.di.component.DaggerApplicationComponent;
@@ -30,11 +29,8 @@ public class CryptoBotApplication extends MultiDexApplication {
         super.onCreate();
         this.initializeSDKs();
 
-        Log.d("Application", "TEST");
-
         synchronized (mLock) {
             singleton = this;
-            Log.d("Application", "GG");
             mApplicationComponent = DaggerApplicationComponent.builder()
                     .applicationModule(new ApplicationModule(this))
                     .build();
@@ -49,7 +45,7 @@ public class CryptoBotApplication extends MultiDexApplication {
 
         ButterKnife.setDebug(true);
 
-        //AstroGoImageLoader.getInstance().init(this);
+        //CryptoGoImageLoader.getInstance().init(this);
 
 //        // Initialize Calligraphy
 //        CalligraphyConfig.initDefault(

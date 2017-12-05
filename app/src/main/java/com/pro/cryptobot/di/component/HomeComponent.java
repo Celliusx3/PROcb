@@ -1,7 +1,7 @@
 package com.pro.cryptobot.di.component;
 
 import com.pro.cryptobot.di.module.HomeModule;
-import com.pro.cryptobot.presentation.activity.MainActivity;
+import com.pro.cryptobot.presentation.view.activity.MainActivity;
 
 import dagger.Subcomponent;
 

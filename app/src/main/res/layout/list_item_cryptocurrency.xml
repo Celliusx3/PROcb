@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="String"/>
+
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="16dp"
+        android:clickable="true"
+        android:onClick="@{listener::onClick}">
+
+        <TextView
+            android:id="@+id/tv_lic_currencyname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@{model}"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:textSize="30sp"
+            tools:text="BTC"/>
+
+        <TextView
+            android:id="@+id/tv_lic_currencyin1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            tools:text="10.00 USD"/>
+
+        <TextView
+            android:id="@+id/tv_lic_currencyin2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_lic_currencyin1"
+            android:layout_alignParentRight="true"
+            tools:text="10.00 MYR"/>
+
+
+    </RelativeLayout>
+</layout>
