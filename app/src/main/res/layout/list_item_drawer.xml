@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="model"
@@ -21,5 +22,6 @@
         android:textColor="@color/white"
         android:clickable="true"
         android:text="@{model}"
-        android:onClick="@{listener::onClick}" />
+        android:onClick="@{listener::onClick}"
+        tools:text="Settings"/>
 </layout>

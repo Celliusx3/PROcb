@@ -5,7 +5,7 @@
     <data>
         <variable
             name="model"
-            type="String"/>
+            type="com.pro.cryptobot.interactor.model.CurrencyModel"/>
 
         <variable
             name="listener"
@@ -15,8 +15,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
         android:padding="16dp"
+        android:background="@color/black"
         android:clickable="true"
         android:onClick="@{listener::onClick}">
 
@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:maxLines="1"
+            android:textColor="@color/white"
             android:text="@{model}"
             android:textAppearance="?android:attr/textAppearanceListItemSmall"
             android:textSize="30sp"
@@ -36,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:textColor="@color/white"
             tools:text="10.00 USD"/>
 
         <TextView
@@ -44,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_lic_currencyin1"
             android:layout_alignParentRight="true"
+            android:textColor="@color/white"
             tools:text="10.00 MYR"/>
 
 

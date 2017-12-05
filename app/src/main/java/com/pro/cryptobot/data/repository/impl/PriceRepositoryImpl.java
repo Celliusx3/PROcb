@@ -1,7 +1,7 @@
 package com.pro.cryptobot.data.repository.impl;
 
 import com.pro.cryptobot.data.api.ApiService;
-import com.pro.cryptobot.data.entity.response.GetPriceResponse;
+import com.pro.cryptobot.data.entity.Currency;
 import com.pro.cryptobot.data.repository.PriceRepository;
 
 import io.reactivex.Observable;
@@ -19,7 +19,7 @@ public class PriceRepositoryImpl implements PriceRepository {
     }
 
     @Override
-    public Observable<GetPriceResponse> getPrice(String fsym, String tsyms, String e, String extraParams) {
+    public Observable<Currency> getPrice(String fsym, String tsyms, String e, String extraParams) {
         return apiService.getPrice(fsym,tsyms,e,extraParams);
     }
 }

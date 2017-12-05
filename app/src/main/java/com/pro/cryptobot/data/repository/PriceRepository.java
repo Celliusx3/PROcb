@@ -1,6 +1,6 @@
 package com.pro.cryptobot.data.repository;
 
-import com.pro.cryptobot.data.entity.response.GetPriceResponse;
+import com.pro.cryptobot.data.entity.Currency;
 
 import io.reactivex.Observable;
 
@@ -10,5 +10,5 @@ import io.reactivex.Observable;
 
 public interface PriceRepository {
 
-    Observable<GetPriceResponse> getPrice(String fsym, String tsyms, String e, String extraParams);
+    Observable<Currency> getPrice(String fsym, String tsyms, String e, String extraParams);
 }

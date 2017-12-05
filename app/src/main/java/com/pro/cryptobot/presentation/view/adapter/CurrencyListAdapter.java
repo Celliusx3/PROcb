@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.pro.cryptobot.R;
 import com.pro.cryptobot.databinding.ListItemCryptocurrencyBinding;
+import com.pro.cryptobot.interactor.model.CurrencyModel;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ import io.reactivex.subjects.PublishSubject;
 
 public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapter.ViewHolder> {
 
-    private List<String> registeredCurrency;
+    private List<CurrencyModel> registeredCurrency;
     private PublishSubject<String> selectedCurrency = PublishSubject.create();
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -37,7 +38,7 @@ public class CurrencyListAdapter extends RecyclerView.Adapter<CurrencyListAdapte
         }
     }
 
-    public CurrencyListAdapter(List<String> registeredCurrency) {
+    public CurrencyListAdapter(List<CurrencyModel> registeredCurrency) {
         this.registeredCurrency = registeredCurrency;
     }
 
