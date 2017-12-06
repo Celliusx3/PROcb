@@ -15,6 +15,7 @@ import com.pro.cryptobot.R;
 import com.pro.cryptobot.databinding.ActivityMainBinding;
 import com.pro.cryptobot.di.module.HomeModule;
 import com.pro.cryptobot.interactor.model.CurrencyModel;
+import com.pro.cryptobot.interactor.model.CurrencyRequestModel;
 import com.pro.cryptobot.interactor.viewmodel.MainViewModel;
 import com.pro.cryptobot.interactor.viewmodel.ViewModel;
 import com.pro.cryptobot.presentation.CryptoBotApplication;
@@ -87,7 +88,13 @@ public class MainActivity extends BaseNavigationActivity {
         ActivityMainBinding binding = DataBindingUtil.bind(view);
         binding.setViewModel(mainViewModel);
         onInitializeSwipeListener();
-        setupCurrencyListAdapter(onInitializeCurrency());
+        mainViewModel.getPrice(onInitializeCurrencyRequestModelList())
+                .compose(bindToLifecycle())
+                .subscribeOn(getIoScheduler())
+                .observeOn(getUiScheduler())
+                .doFinally(()->srlView.setRefreshing(false))
+                .subscribe(currencyModels->{
+                    setupCurrencyListAdapter(currencyModels);});
         setupDrawerListAdapter(onInitializeDrawerList());
     }
 
@@ -126,13 +133,13 @@ public class MainActivity extends BaseNavigationActivity {
     }
 
     private void onInitializeSwipeListener(){
-        srlView.setOnRefreshListener(() -> mainViewModel.getPrice("BTC","USD,MYR","Coinbase", null)
+        srlView.setOnRefreshListener(() -> mainViewModel.getPrice(onInitializeCurrencyRequestModelList())
                 .compose(bindToLifecycle())
                 .subscribeOn(getIoScheduler())
                 .observeOn(getUiScheduler())
                 .doFinally(()->srlView.setRefreshing(false))
-                .subscribe(price->{
-                    Log.d(TAG,price);}));
+                .subscribe(currencyModels->{
+                    setupCurrencyListAdapter(currencyModels);}));
     }
 
     private void setupDrawerListAdapter(List<String> drawerList) {
@@ -160,8 +167,16 @@ public class MainActivity extends BaseNavigationActivity {
     private List<String> onInitializeDrawerList(){
         List<String> navigationTabs = new ArrayList<>();
         navigationTabs.add("Settings");
-        //navigationTabs.add("ETH");
         return navigationTabs;
+    }
+
+    private List<CurrencyRequestModel> onInitializeCurrencyRequestModelList(){
+        List<CurrencyRequestModel> currencyRequestModelList = new ArrayList<>();
+        CurrencyRequestModel currencyRequestModel = new CurrencyRequestModel("BTC","USD,EUR",null, null);
+        currencyRequestModelList.add(currencyRequestModel);
+        CurrencyRequestModel currencyRequestModel2 = new CurrencyRequestModel("ETH","USD,EUR",null, null);
+        currencyRequestModelList.add(currencyRequestModel2);
+        return currencyRequestModelList;
     }
 }
 

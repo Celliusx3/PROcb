@@ -2,7 +2,12 @@ package com.pro.cryptobot.interactor.viewmodel;
 
 import android.databinding.ObservableBoolean;
 
-import io.reactivex.Observable;
+import com.pro.cryptobot.interactor.model.CurrencyModel;
+import com.pro.cryptobot.interactor.model.CurrencyRequestModel;
+
+import java.util.List;
+
+import io.reactivex.Single;
 
 /**
  * Created by coyanoh on 01/12/2017.
@@ -10,7 +15,7 @@ import io.reactivex.Observable;
 
 public interface MainViewModel extends ViewModel {
 
-    Observable<String> getPrice(String fsym, String tsyms, String e, String extraParams);
+    Single<List<CurrencyModel>> getPrice(List<CurrencyRequestModel> currencyRequestModels);
 
     ObservableBoolean getLoading();
 
