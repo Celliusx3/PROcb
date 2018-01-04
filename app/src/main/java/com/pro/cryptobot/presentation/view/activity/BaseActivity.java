@@ -1,7 +1,9 @@
 package com.pro.cryptobot.presentation.view.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.LayoutRes;
@@ -16,6 +18,7 @@ import com.pro.cryptobot.R;
 import com.pro.cryptobot.interactor.scheduler.BaseSchedulerProvider;
 import com.pro.cryptobot.interactor.viewmodel.ViewModel;
 import com.pro.cryptobot.presentation.navigation.Navigator;
+import com.pro.cryptobot.presentation.util.ConnectivityUtil;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import javax.inject.Inject;
@@ -76,6 +79,9 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         return "";
     }
 
+    private IntentFilter netFilter;
+    private BroadcastReceiver connectivityReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +92,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         onBindView();
         onInject();
         onBindData(getRootView());
+
+        onInitializeNetworkReceiver();
 
         if (getViewModel() != null) {
             getViewModel().onCreateView();
@@ -247,7 +255,20 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         }
     }
 
-    /*protected boolean isDeepLink(@NonNull Intent intent) {
-        return intent.getBooleanExtra(DeepLink.IS_DEEP_LINK, false);
-    }*/
+    protected void onInitializeIntentFilter(){
+        netFilter =  new IntentFilter();
+        netFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+    }
+
+    protected void onInitializeNetworkReceiver(){
+        connectivityReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                boolean isNetworkConnected = ConnectivityUtil.isNetworkConnected(context);
+                if (!isNetworkConnected) {
+                    showToastMessage("No connection to internet.");
+                }
+            }
+        };
+    }
 }

@@ -4,6 +4,7 @@ import android.databinding.ObservableBoolean;
 
 import com.pro.cryptobot.interactor.model.CurrencyModel;
 import com.pro.cryptobot.interactor.model.CurrencyRequestModel;
+import com.pro.cryptobot.interactor.model.NavigationTabModel;
 
 import java.util.List;
 
@@ -18,5 +19,8 @@ public interface MainViewModel extends ViewModel {
     Single<List<CurrencyModel>> getPrice(List<CurrencyRequestModel> currencyRequestModels);
 
     ObservableBoolean getLoading();
+
+    List<NavigationTabModel> getNavigationTabModel();
+
 
 }

@@ -2,13 +2,16 @@ package com.pro.cryptobot.interactor.viewmodel.impl;
 
 import android.databinding.ObservableBoolean;
 
+import com.pro.cryptobot.R;
 import com.pro.cryptobot.data.repository.PriceRepository;
 import com.pro.cryptobot.interactor.model.CurrencyModel;
 import com.pro.cryptobot.interactor.model.CurrencyRequestModel;
+import com.pro.cryptobot.interactor.model.NavigationTabModel;
 import com.pro.cryptobot.interactor.scheduler.BaseSchedulerProvider;
 import com.pro.cryptobot.interactor.viewmodel.BaseViewModel;
 import com.pro.cryptobot.interactor.viewmodel.MainViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -47,5 +50,18 @@ public class MainViewModelImpl extends BaseViewModel implements MainViewModel {
     @Override
     public ObservableBoolean getLoading() {
         return loading;
+    }
+
+    @Override
+    public List<NavigationTabModel> getNavigationTabModel() {
+        List<NavigationTabModel> navigationTabModels = new ArrayList<>();
+
+        NavigationTabModel homeTabModel = new NavigationTabModel("Home", R.drawable.ic_home_white_24dp);
+        navigationTabModels.add(homeTabModel);
+
+        NavigationTabModel settingTabModel = new NavigationTabModel("Settings", R.drawable.ic_settings_white_24dp);
+        navigationTabModels.add(settingTabModel);
+
+        return navigationTabModels;
     }
 }

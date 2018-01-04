@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -16,6 +15,7 @@ import com.pro.cryptobot.databinding.ActivityMainBinding;
 import com.pro.cryptobot.di.module.HomeModule;
 import com.pro.cryptobot.interactor.model.CurrencyModel;
 import com.pro.cryptobot.interactor.model.CurrencyRequestModel;
+import com.pro.cryptobot.interactor.model.NavigationTabModel;
 import com.pro.cryptobot.interactor.viewmodel.MainViewModel;
 import com.pro.cryptobot.interactor.viewmodel.ViewModel;
 import com.pro.cryptobot.presentation.CryptoBotApplication;
@@ -77,7 +77,6 @@ public class MainActivity extends BaseNavigationActivity {
 
     @Override
     protected void onInject() {
-        Log.d(TAG,Boolean.toString(CryptoBotApplication.getInstance()== null));
         CryptoBotApplication.getInstance()
                 .getApplicationComponent()
                 .plus(new HomeModule(this))
@@ -87,15 +86,16 @@ public class MainActivity extends BaseNavigationActivity {
     protected void onBindData(@Nullable View view) {
         ActivityMainBinding binding = DataBindingUtil.bind(view);
         binding.setViewModel(mainViewModel);
+
+        setupDrawerListAdapter(mainViewModel.getNavigationTabModel());
+
         onInitializeSwipeListener();
         mainViewModel.getPrice(onInitializeCurrencyRequestModelList())
                 .compose(bindToLifecycle())
                 .subscribeOn(getIoScheduler())
                 .observeOn(getUiScheduler())
                 .doFinally(()->srlView.setRefreshing(false))
-                .subscribe(currencyModels->{
-                    setupCurrencyListAdapter(currencyModels);});
-        setupDrawerListAdapter(onInitializeDrawerList());
+                .subscribe(currencyModels-> setupCurrencyListAdapter(currencyModels),Throwable::printStackTrace);
     }
 
     @Override
@@ -139,10 +139,10 @@ public class MainActivity extends BaseNavigationActivity {
                 .observeOn(getUiScheduler())
                 .doFinally(()->srlView.setRefreshing(false))
                 .subscribe(currencyModels->{
-                    setupCurrencyListAdapter(currencyModels);}));
+                    setupCurrencyListAdapter(currencyModels);},Throwable::printStackTrace));
     }
 
-    private void setupDrawerListAdapter(List<String> drawerList) {
+    private void setupDrawerListAdapter(List<NavigationTabModel> drawerList) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this,
                 LinearLayoutManager.VERTICAL, false);
         rvNavDrawer.setLayoutManager(layoutManager);
@@ -162,12 +162,6 @@ public class MainActivity extends BaseNavigationActivity {
                 .subscribe(selectedNavigationTab -> {
                 }, throwable -> {
                 });
-    }
-
-    private List<String> onInitializeDrawerList(){
-        List<String> navigationTabs = new ArrayList<>();
-        navigationTabs.add("Settings");
-        return navigationTabs;
     }
 
     private List<CurrencyRequestModel> onInitializeCurrencyRequestModelList(){

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.pro.cryptobot.R;
 import com.pro.cryptobot.databinding.ListItemDrawerBinding;
+import com.pro.cryptobot.interactor.model.NavigationTabModel;
 
 import java.util.List;
 
@@ -20,8 +21,8 @@ import io.reactivex.subjects.PublishSubject;
 
 public class DrawerListAdapter extends RecyclerView.Adapter<DrawerListAdapter.ViewHolder> {
 
-    private List<String> navigationTabs;
-    private PublishSubject<String> selectedNavigationTab = PublishSubject.create();
+    private List<NavigationTabModel> navigationTabs;
+    private PublishSubject<NavigationTabModel> selectedNavigationTab = PublishSubject.create();
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ListItemDrawerBinding binding;
@@ -37,11 +38,11 @@ public class DrawerListAdapter extends RecyclerView.Adapter<DrawerListAdapter.Vi
         }
     }
 
-    public DrawerListAdapter(List<String> navigationTabs) {
+    public DrawerListAdapter(List<NavigationTabModel> navigationTabs) {
         this.navigationTabs = navigationTabs;
     }
 
-    public Observable<String> getSelectedNavigationTab() {
+    public Observable<NavigationTabModel> getSelectedNavigationTab() {
         return selectedNavigationTab;
     }
 
