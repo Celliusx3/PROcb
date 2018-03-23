@@ -12,32 +12,39 @@
     </data>
 
     <RelativeLayout
-        android:background="@color/black"
         android:layout_width="match_parent"
-        android:clickable="true"
-        android:onClick="@{listener::onClick}"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/black">
 
-        <ImageView
-            android:id="@+id/iv_drawer_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:padding="16dp"
-            android:layout_weight="1"
-            android:src="@{model.TabImage}"
-            tools:src="@drawable/ic_settings_white_24dp"/>
-
-        <TextView
-            android:id="@+id/main_menu_title"
+        <RelativeLayout
+            android:background="@drawable/selector_ripple"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textSize="24sp"
-            android:textColor="@color/white"
-            android:layout_toRightOf="@+id/iv_drawer_image"
-            android:text="@{model.TabString}"
-            tools:text="Settings"/>
+            android:clickable="true"
+            android:onClick="@{listener::onClick}"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_drawer_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="16dp"
+                android:layout_weight="1"
+                android:src="@{model.TabImage}"
+                tools:src="@drawable/ic_settings_white_24dp"/>
+
+            <TextView
+                android:id="@+id/main_menu_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:layout_toRightOf="@+id/iv_drawer_image"
+                android:text="@{model.TabString}"
+                tools:text="Settings"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

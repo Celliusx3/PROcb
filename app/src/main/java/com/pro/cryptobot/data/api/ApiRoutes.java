@@ -29,4 +29,5 @@ public interface ApiRoutes {
     String MINING_CONTRACT = "miningcontract";
     String MINING_EQUIPMENT = "miningequipment";
     String TOP_PAIRS = "top/pairs";
+
 }

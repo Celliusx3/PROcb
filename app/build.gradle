@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 //apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+
 android {
     compileSdkVersion 25
     buildToolsVersion "27.0.0"
@@ -157,8 +158,6 @@ dependencies {
 
     compile "com.android.support.constraint:constraint-layout:${CONSTRAINT_LAYOUT_VERSION}"
     provided "javax.annotation:jsr250-api:${JSR250_VERSION}"
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 repositories {
     mavenCentral()

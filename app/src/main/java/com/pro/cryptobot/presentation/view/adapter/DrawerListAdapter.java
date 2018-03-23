@@ -59,6 +59,13 @@ public class DrawerListAdapter extends RecyclerView.Adapter<DrawerListAdapter.Vi
 
         holder.binding.setModel(navigationTabs.get(position));
 
+        holder.binding.setListener(v->{
+            int pos = holder.getAdapterPosition();
+            if (pos >= 0){
+                selectedNavigationTab.onNext(navigationTabs.get(pos));
+            }
+        });
+
         /*holder.binding.setSwitchOutListener(v -> {
             int pos = holder.getAdapterPosition();
             if (pos >= 0) {
